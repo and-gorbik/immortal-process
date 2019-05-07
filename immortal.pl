@@ -8,6 +8,7 @@ while () {
     my $pid = fork();
     die "Error with fork: $!\n" unless defined $pid;    
     if ($pid) {
+        $SIG{INT} = sub { warn "[$$] Yeah, baby, I'm immortal\n"; };
         waitpid($pid, 0);
         warn "[$$] Master is creating a new child\n";
     } else {
